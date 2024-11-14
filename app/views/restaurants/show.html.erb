@@ -1,0 +1,44 @@
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.category %></p>
+
+  <h3>Reviews</h3>
+  <%# <%= link_to "Write a review", new_restaurant_review_path(@restaurant) %>
+  <a href="#review-form" id="review-btn">Write a review</a>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <li>
+        <div class="d-flex">
+          <% review.rating.times do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (5 - review.rating).times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        </div>
+        <p><%= review.content %></p>
+      </li>
+    <% end %>
+  </ul>
+
+  <div id="review-form">
+    <h3>New Review</h3>
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <div class="star-rating">
+        <% 5.times do |i| %>
+          <input type="radio" name="review[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
+        <% end %>
+      </div>
+      <%= f.input :content %>
+      <%= f.submit %>
+    <% end %>
+
+    <%= link_to restaurant_path(@restaurant), class: 'text-decoration-none' do %>
+      <i class="fa-solid fa-xmark"></i>
+    <% end %>
+  </div>
+
+  <%= link_to "Restaurants List", restaurants_path %>
+
+</div>

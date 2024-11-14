@@ -1,0 +1,20 @@
+<div class="card-product mb-3">
+  <img src="https://loremflickr.com/260/240/restaurant,<%= restaurant.category.downcase %>/all?lock=<%= restaurant.id %>);" />
+  <div class="card-product-infos">
+    <h2><%= restaurant.name %></h2>
+
+    <div class="d-flex">
+      <% restaurant.avg_rating.to_i.times do %>
+        <i class="fas fa-star align-bottom"></i>
+      <% end %>
+      <% (5 - restaurant.avg_rating.to_i).times do %>
+        <i class="far fa-star align-bottom"></i>
+      <% end %>
+      <p>(<%= restaurant.avg_rating %>)</p>
+    </div>
+
+    <p><%= restaurant.category %></p>
+    <p><%= restaurant.address %></p>
+  </div>
+  <%= link_to "", restaurant_path(restaurant), class: 'card-product-link' %>
+</div>
